@@ -5,7 +5,7 @@ SKAT = function(Z,obj, kernel = "linear.weighted", method="davies", weights.beta
 
 	if(kernel != "linear" && kernel != "linear.weighted"){
 
-		if(class(obj) == "SKAT_NULL_Model_ADJ"){
+		if(inherits(obj, "SKAT_NULL_Model_ADJ")){
 			msg<-sprintf("The small sample adjustment only can be applied for linear and linear.weighted kernel in the current version of SKAT! No adjustment is applied")
 			warning(msg,call.=FALSE)
 			obj<-obj$re1
@@ -150,7 +150,7 @@ SKAT_MAIN_Check_Z<-function(Z, n, id_include, SetID, weights, weights.beta, impu
 	#############################################
 	# Check parameters
 
-	if (class(Z)!= "matrix") stop("Z is not a matrix")
+	if (!inherits(Z, "matrix")) stop("Z is not a matrix")
 	if (nrow(Z)!=n) stop("Dimensions of y and Z do not match")
  	if(is_dosage ==TRUE){
 		impute.method="fixed"
